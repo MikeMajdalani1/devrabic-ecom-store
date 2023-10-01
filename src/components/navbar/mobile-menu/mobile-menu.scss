@@ -1,0 +1,30 @@
+.mobile-menu {
+  width: 100%;
+  background-color: white;
+  height: 100%;
+  overflow-y: scroll;
+
+  &__content {
+    max-width: 640px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 50px;
+
+    &__item {
+      display: flex;
+      font-size: 18px;
+      align-items: center;
+      padding: 16px 0;
+      opacity: 0.8;
+
+      &--selected {
+        opacity: 1;
+        font-weight: 600;
+      }
+    }
+    & button {
+      margin-bottom: 20px;
+    }
+  }
+}

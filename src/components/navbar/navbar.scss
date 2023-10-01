@@ -1,0 +1,54 @@
+@import '../navbar/mobile-menu/mobile-menu.scss';
+
+.navbar {
+  min-height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  background-color: white;
+  padding: 20px 30px;
+  align-items: center;
+  border-bottom: 2px solid hsla(0, 0%, 52.2%, 0.1);
+
+  &__left-side {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+
+    &__logo {
+      display: flex;
+      align-items: center;
+      &__text {
+        font-size: 18px;
+        @media screen and (max-width: 900px) {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+  &__right-side {
+    display: flex;
+
+    &__item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px;
+      opacity: 0.8;
+      cursor: pointer;
+
+      &--selected {
+        opacity: 1;
+        font-weight: 600;
+      }
+    }
+    &__icon {
+      font-size: 25px;
+    }
+    &__btn {
+      margin: 0 10px;
+    }
+  }
+}
