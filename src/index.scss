@@ -2,8 +2,11 @@ $color-primary: #3b4142;
 $color-secondary: #f9f8f9;
 $color-white: #fff;
 $color-black: #000;
+$color-grey: #999;
 
 @import 'components/navbar/navbar.scss';
+@import 'components/product-card/product-card.scss';
+@import 'styles/store.scss';
 
 * {
   margin: 0;
@@ -17,6 +20,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: $color-secondary;
 }
 
 code {
