@@ -7,7 +7,7 @@ const DesktopMenu = () => {
   return (
     <>
       <Link
-        to="/store"
+        to="/"
         className={` navbar__right-side__item ${
           isStoreSelected(loc.pathname)
             ? 'navbar__right-side__item--selected'

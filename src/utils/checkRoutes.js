@@ -1,4 +1,4 @@
-export const storePath = '/store';
+export const storePath = '/';
 export const cartPath = '/cart';
 
 export const isStoreSelected = (currentPath) => currentPath === storePath;
