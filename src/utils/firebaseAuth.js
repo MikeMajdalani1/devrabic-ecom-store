@@ -4,7 +4,14 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import {
+  doc,
+  setDoc,
+  query,
+  collection,
+  where,
+  getDocs,
+} from 'firebase/firestore';
 import { database } from './firebaseConfig';
 
 const auth = getAuth();
@@ -24,8 +31,6 @@ export function getFrontendErrorMessage(errorCode) {
       return 'Invalid email address. Please enter a valid email.';
     case 'Firebase: Error (auth/weak-password).':
       return 'Weak password. Please choose a stronger password.';
-    case 'Firebase: Error (auth/user-not-found).':
-      return 'User not found. Please check your email or sign up for a new account.';
     case 'Firebase: Error (auth/invalid-login-credentials).':
       return 'Incorrect credentials, please make sure you add correct ones.';
     case 'Firebase: Error (auth/operation-not-allowed).':
@@ -66,6 +71,22 @@ export const signOutUser = async () => {
   try {
     await signOut(auth);
     return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export const fetchUserData = async (user) => {
+  try {
+    const q = query(
+      collection(database, 'users'),
+      where('__name__', '==', user?.uid)
+    );
+    const doc = await getDocs(q);
+
+    const data = doc.docs[0].data();
+
+    return { success: true, data: data };
   } catch (error) {
     return { success: false, error: error.message };
   }

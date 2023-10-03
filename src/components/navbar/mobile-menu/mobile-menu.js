@@ -1,9 +1,17 @@
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { isStoreSelected, isCartSelected } from 'utils/checkRoutes';
+import { signOutUser } from 'utils/firebaseAuth';
+import { MainContext } from 'utils/context';
+import { useContext } from 'react';
 
 const MobileMenu = ({ closeFn }) => {
+  const { user } = useContext(MainContext);
+
   const loc = useLocation();
   const navigate = useNavigate();
+  const signOut = async () => {
+    await signOutUser();
+  };
   return (
     <div className="mobile-menu sticky">
       <nav className="mobile-menu__content">
@@ -32,15 +40,21 @@ const MobileMenu = ({ closeFn }) => {
           </Link>
         </div>
         <div className="mobile-menu__content">
-          <button
-            onClick={() => {
-              navigate('/authenticate');
-              closeFn();
-            }}
-            className="primary"
-          >
-            Login
-          </button>
+          {user ? (
+            <button onClick={signOut} className="primary">
+              Sign Out
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                navigate('/authenticate');
+                closeFn();
+              }}
+              className="primary"
+            >
+              Login
+            </button>
+          )}
         </div>
       </nav>
     </div>
