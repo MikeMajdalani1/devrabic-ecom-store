@@ -1,10 +1,14 @@
 import { MainContext } from 'utils/context';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-function ProductCard({ name, description, price, wasPrice, imageURL }) {
+import { updateArrayData } from 'utils/firebaseAuth';
+function ProductCard({ product }) {
+  const { imageURL, name, wasPrice, description, price } = product;
   const { user } = useContext(MainContext);
   const navigate = useNavigate();
-  const handleClick = () => {};
+  const addProduct = async () => {
+    await updateArrayData(product);
+  };
   const redirectToLogin = () => {
     navigate('/authenticate');
   };
@@ -33,7 +37,7 @@ function ProductCard({ name, description, price, wasPrice, imageURL }) {
       </div>
       <button
         className="product-card__btn"
-        onClick={user ? handleClick : redirectToLogin}
+        onClick={user ? addProduct : redirectToLogin}
       >
         Add to cart
       </button>

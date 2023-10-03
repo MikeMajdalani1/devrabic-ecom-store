@@ -11,13 +11,16 @@ import {
   collection,
   where,
   getDocs,
+  updateDoc,
+  arrayUnion,
+  onSnapshot,
+  arrayRemove,
 } from 'firebase/firestore';
 import { database } from './firebaseConfig';
 
 const auth = getAuth();
 
 export function getFrontendErrorMessage(errorCode) {
-  console.log(errorCode);
   switch (errorCode) {
     case 'Firebase: Error (auth/user-not-found).':
       return 'This email is not registered, please make sure you enter a registered email.';
@@ -49,7 +52,7 @@ export const registerUser = async (username, email, password) => {
 
     await setDoc(doc(database, 'users', user.uid), {
       username: username,
-      ownedProducts: [],
+      cartProducts: [],
     });
 
     return { success: true }; // Indicate success
@@ -91,3 +94,45 @@ export const fetchUserData = async (user) => {
     return { success: false, error: error.message };
   }
 };
+
+export const updateArrayData = async (product) => {
+  const user = auth.currentUser;
+
+  const docRef = doc(database, 'users', user.uid);
+
+  try {
+    await updateDoc(docRef, {
+      cartProducts: arrayUnion(product),
+    });
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export const deleteArrayData = async (product) => {
+  const user = auth.currentUser;
+
+  const docRef = doc(database, 'users', user.uid);
+
+  try {
+    await updateDoc(docRef, {
+      cartProducts: arrayRemove(product),
+    });
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export function setupDBListener(user, callback) {
+  const docRef = doc(database, 'users', user.uid);
+  return onSnapshot(docRef, (doc) => {
+    if (doc.exists()) {
+      const data = doc.data();
+      callback(data['cartProducts']);
+    }
+  });
+}

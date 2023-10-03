@@ -7,19 +7,36 @@ import { Route, Routes } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from 'firebase/auth';
 import { fetchUserData } from 'utils/firebaseAuth';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { MainContext } from 'utils/context';
+import { setupDBListener } from 'utils/firebaseAuth';
+import { products } from 'utils/products';
 
 function App() {
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
+  const [username, setUsername] = useState();
+  const [cartProducts, setCartProducts] = useState();
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   const fetchData = async () => {
     const res = await fetchUserData(user);
     if (res.success) {
-      console.log(res);
+      setUsername(res.data.username);
+      setCartProducts(res.data.cartProducts);
     }
   };
+  useEffect(() => {
+    if (!loading && user) {
+      setupDBListener(user, (data) => {
+        const updatedProducts = products.filter((product) => {
+          return !data.some((cartProduct) => cartProduct.id === product.id);
+        });
+        setFilteredProducts(updatedProducts);
+        setCartProducts(data);
+      });
+    }
+  }, [loading, user]);
 
   useEffect(() => {
     user && fetchData();
@@ -31,6 +48,9 @@ function App() {
         value={{
           user,
           loading,
+          username,
+          cartProducts,
+          filteredProducts,
         }}
       >
         <NavBar />

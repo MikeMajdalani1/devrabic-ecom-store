@@ -10,6 +10,8 @@ $color-red: red;
 @import 'styles/store.scss';
 @import 'components/register-form/register-form.scss';
 @import 'styles/authenticate.scss';
+@import 'components/cart-card/cart-card.scss';
+@import 'styles/cart.scss';
 
 * {
   margin: 0;
