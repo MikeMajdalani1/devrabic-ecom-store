@@ -1,16 +1,15 @@
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { isStoreSelected, isCartSelected } from 'utils/checkRoutes';
 
 const MobileMenu = ({ closeFn }) => {
   const loc = useLocation();
-
+  const navigate = useNavigate();
   return (
     <div className="mobile-menu sticky">
       <nav className="mobile-menu__content">
         <div className="mobile-menu__content">
           <Link
-            to="/store"
+            to="/"
             onClick={closeFn}
             className={` mobile-menu__content__item ${
               isStoreSelected(loc.pathname)
@@ -33,7 +32,15 @@ const MobileMenu = ({ closeFn }) => {
           </Link>
         </div>
         <div className="mobile-menu__content">
-          <button className="primary">Login</button>
+          <button
+            onClick={() => {
+              navigate('/authenticate');
+              closeFn();
+            }}
+            className="primary"
+          >
+            Login
+          </button>
         </div>
       </nav>
     </div>
