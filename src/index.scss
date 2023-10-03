@@ -3,10 +3,13 @@ $color-secondary: #f9f8f9;
 $color-white: #fff;
 $color-black: #000;
 $color-grey: #999;
+$color-red: red;
 
 @import 'components/navbar/navbar.scss';
 @import 'components/product-card/product-card.scss';
 @import 'styles/store.scss';
+@import 'components/register-form/register-form.scss';
+@import 'styles/authenticate.scss';
 
 * {
   margin: 0;
