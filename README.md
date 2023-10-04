@@ -1,6 +1,6 @@
-# DevRabic E-Commerce App
+# Devrabic E-Commerce App
 
-Welcome to the DevRabic E-Commerce App repository! This app is developed as a part of the Devrabic course, designed to teach Arabic-speaking developers how to build modern web applications from scratch. The development of this app is explained code by code in the Devrabic course to help you understand the core concepts of web development.
+Welcome to the Devrabic E-Commerce App repository! This app is developed as a part of the Devrabic course, designed to teach Arabic-speaking developers how to build modern web applications from scratch. The development of this app is explained code by code in the Devrabic course to help you understand the core concepts of web development.
 
 ## Overview
 
@@ -39,7 +39,7 @@ REACT_APP_FIREBASE_APP_ID=
 
 ## Course Materials
 
-The development of this app is explained code by code in the Devrabic course. You can find the course materials, including video tutorials, documentation, and code explanations, on the [DevRabic course website](https://devrabic.com).
+The development of this app is explained code by code in the Devrabic course. You can find the course materials, including video tutorials, documentation, and code explanations, on the [Devrabic course website](https://devrabic.com).
 
 ## Contributing
 
