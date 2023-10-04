@@ -39,6 +39,9 @@
       opacity: 0.8;
       cursor: pointer;
 
+      &--cart-count {
+        padding: 0 10px 0 0;
+      }
       &--selected {
         opacity: 1;
         font-weight: 600;
@@ -49,6 +52,12 @@
     }
     &__btn {
       margin: 0 10px;
+    }
+    &__cart-count {
+      border-radius: 50%;
+      background-color: $color-primary;
+      color: white;
+      padding: 5px 10px;
     }
   }
 }

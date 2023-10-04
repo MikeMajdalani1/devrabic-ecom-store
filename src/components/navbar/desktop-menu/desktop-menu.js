@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { signOutUser } from 'utils/firebaseAuth';
 import { TailSpin } from 'react-loader-spinner';
 const DesktopMenu = () => {
-  const { user, loading } = useContext(MainContext);
+  const { user, loading, cartProducts } = useContext(MainContext);
   const loc = useLocation();
   const navigate = useNavigate();
 
@@ -25,17 +25,23 @@ const DesktopMenu = () => {
         <p>Store</p>
       </Link>
 
-      <Link
-        to="/cart"
-        className={` navbar__right-side__item ${
-          isCartSelected(loc.pathname)
-            ? 'navbar__right-side__item--selected'
-            : ''
-        }`}
-      >
-        <p>Cart</p>
-      </Link>
-
+      <div className="navbar__right-side__item">
+        <Link
+          to="/cart"
+          className={`navbar__right-side__item navbar__right-side__item--cart-count ${
+            isCartSelected(loc.pathname)
+              ? 'navbar__right-side__item--selected'
+              : ''
+          }`}
+        >
+          <p>Cart</p>
+        </Link>
+        {user && cartProducts && (
+          <div className="navbar__right-side__cart-count">
+            {cartProducts.length}
+          </div>
+        )}
+      </div>
       <div className="navbar__right-side__btn">
         {loading ? (
           <TailSpin

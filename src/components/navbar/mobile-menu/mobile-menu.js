@@ -5,7 +5,7 @@ import { MainContext } from 'utils/context';
 import { useContext } from 'react';
 
 const MobileMenu = ({ closeFn }) => {
-  const { user } = useContext(MainContext);
+  const { user, cartProducts } = useContext(MainContext);
 
   const loc = useLocation();
   const navigate = useNavigate();
@@ -27,17 +27,24 @@ const MobileMenu = ({ closeFn }) => {
           >
             <p>Store</p>
           </Link>
-          <Link
-            to="/cart"
-            onClick={closeFn}
-            className={` mobile-menu__content__item ${
-              isCartSelected(loc.pathname)
-                ? 'mobile-menu__content__item--selected'
-                : ''
-            }`}
-          >
-            <p>Cart</p>
-          </Link>
+          <div className=" mobile-menu__content__item">
+            <Link
+              to="/cart"
+              onClick={closeFn}
+              className={` mobile-menu__content__item ${
+                isCartSelected(loc.pathname)
+                  ? 'mobile-menu__content__item--selected'
+                  : ''
+              }`}
+            >
+              <p>Cart</p>
+            </Link>
+            {user && cartProducts && (
+              <div className="mobile-menu__content__cart-count">
+                {cartProducts.length}
+              </div>
+            )}
+          </div>
         </div>
         <div className="mobile-menu__content">
           {user ? (
