@@ -14,26 +14,24 @@ function ProductCard({ product }) {
   };
   return (
     <div className="product-card">
-      <div className="product-card__container">
-        <div className="product-card__content">
-          <img
-            className="product-card__content__image"
-            alt={name}
-            src={imageURL}
-          ></img>
-          <span className="product-card__content__title"> {name}</span>
-          <div className="product-card__content__price">
-            {price}{' '}
-            {wasPrice && (
-              <span className="product-card__content__price__slash">
-                {wasPrice}
-              </span>
-            )}
-          </div>
-          <span className="product-card__content__description">
-            {description}
-          </span>
+      <div className="product-card__content">
+        <img
+          className="product-card__content__image"
+          alt={name}
+          src={imageURL}
+        ></img>
+        <span className="product-card__content__title"> {name}</span>
+        <div className="product-card__content__price">
+          {price}{' '}
+          {wasPrice && (
+            <span className="product-card__content__price__slash">
+              {wasPrice}
+            </span>
+          )}
         </div>
+        <span className="product-card__content__description">
+          {description}
+        </span>
       </div>
       <button
         className="product-card__btn"

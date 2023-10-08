@@ -23,7 +23,7 @@ function NavBar() {
 
   return (
     <div>
-      <div className="navbar sticky">
+      <div className="navbar">
         <div className="navbar__left-side">
           <Link to="/">
             <div className="navbar__left-side__logo">
