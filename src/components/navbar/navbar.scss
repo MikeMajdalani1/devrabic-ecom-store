@@ -12,13 +12,7 @@
   border-bottom: 2px solid hsla(0, 0%, 52.2%, 0.1);
 
   &__left-side {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-
     &__logo {
-      display: flex;
-      align-items: center;
       &__text {
         font-size: 18px;
         @media screen and (max-width: 900px) {

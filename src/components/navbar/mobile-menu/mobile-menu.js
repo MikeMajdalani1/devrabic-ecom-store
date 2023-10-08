@@ -13,57 +13,53 @@ const MobileMenu = ({ closeFn }) => {
     await signOutUser();
   };
   return (
-    <div className="mobile-menu sticky">
-      <nav className="mobile-menu__content">
-        <div className="mobile-menu__content">
-          <Link
-            to="/"
-            onClick={closeFn}
-            className={` mobile-menu__content__item ${
-              isStoreSelected(loc.pathname)
-                ? 'mobile-menu__content__item--selected'
-                : ''
-            }`}
-          >
-            <p>Store</p>
-          </Link>
-          <div className=" mobile-menu__content__item">
-            <Link
-              to="/cart"
-              onClick={closeFn}
-              className={` mobile-menu__content__item ${
-                isCartSelected(loc.pathname)
-                  ? 'mobile-menu__content__item--selected'
-                  : ''
-              }`}
-            >
-              <p>Cart</p>
-            </Link>
-            {user && cartProducts && (
-              <div className="mobile-menu__content__cart-count">
-                {cartProducts.length}
-              </div>
-            )}
+    <div className="mobile-menu">
+      <div className="mobile-menu__content">
+        <Link
+          to="/"
+          onClick={closeFn}
+          className={` mobile-menu__content__item ${
+            isStoreSelected(loc.pathname)
+              ? 'mobile-menu__content__item--selected'
+              : ''
+          }`}
+        >
+          <p>Store</p>
+        </Link>
+
+        <Link
+          to="/cart"
+          onClick={closeFn}
+          className={` mobile-menu__content__item ${
+            isCartSelected(loc.pathname)
+              ? 'mobile-menu__content__item--selected'
+              : ''
+          }`}
+        >
+          <p>Cart</p>
+        </Link>
+        {user && cartProducts && (
+          <div className="mobile-menu__content__cart-count">
+            {cartProducts.length}
           </div>
-        </div>
-        <div className="mobile-menu__content">
-          {user ? (
-            <button onClick={signOut} className="primary">
-              Sign Out
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                navigate('/authenticate');
-                closeFn();
-              }}
-              className="primary"
-            >
-              Login
-            </button>
-          )}
-        </div>
-      </nav>
+        )}
+
+        {user ? (
+          <button onClick={signOut} className="primary">
+            Sign Out
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              navigate('/authenticate');
+              closeFn();
+            }}
+            className="primary"
+          >
+            Login
+          </button>
+        )}
+      </div>
     </div>
   );
 };
