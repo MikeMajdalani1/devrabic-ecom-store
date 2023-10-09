@@ -5,15 +5,14 @@ import Cart from 'pages/cart';
 import Authenticate from 'pages/authenticate';
 import { Route, Routes } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getAuth } from 'firebase/auth';
 import { fetchUserData } from 'utils/firebaseAuth';
 import { useEffect, useState } from 'react';
 import { MainContext } from 'utils/context';
 import { setupDBListener } from 'utils/firebaseAuth';
 import { products } from 'utils/products';
+import { auth } from 'utils/firebaseConfig';
 
 function App() {
-  const auth = getAuth();
   const [user, loading] = useAuthState(auth);
   const [username, setUsername] = useState();
   const [cartProducts, setCartProducts] = useState();
