@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { registerUser, getFrontendErrorMessage } from 'utils/firebaseAuth';
+import { registerUser, getFrontendErrorMessage } from 'utils/firebaseFunctions';
 import { useNavigate } from 'react-router-dom';
 
 function RegisterForm() {

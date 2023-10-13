@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { signInUser, getFrontendErrorMessage } from 'utils/firebaseAuth';
+import { signInUser, getFrontendErrorMessage } from 'utils/firebaseFunctions';
 import { useNavigate } from 'react-router-dom';
 function LogInForm() {
   const [email, setEmail] = useState('');

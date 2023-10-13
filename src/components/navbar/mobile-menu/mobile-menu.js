@@ -1,6 +1,6 @@
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { isStoreSelected, isCartSelected } from 'utils/checkRoutes';
-import { signOutUser } from 'utils/firebaseAuth';
+import { signOutUser } from 'utils/firebaseFunctions';
 import { MainContext } from 'utils/context';
 import { useContext } from 'react';
 

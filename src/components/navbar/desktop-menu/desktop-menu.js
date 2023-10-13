@@ -2,7 +2,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { isStoreSelected, isCartSelected } from 'utils/checkRoutes';
 import { MainContext } from 'utils/context';
 import { useContext } from 'react';
-import { signOutUser } from 'utils/firebaseAuth';
+import { signOutUser } from 'utils/firebaseFunctions';
 import { TailSpin } from 'react-loader-spinner';
 const DesktopMenu = () => {
   const { user, loading, cartProducts } = useContext(MainContext);

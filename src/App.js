@@ -5,10 +5,10 @@ import Cart from 'pages/cart';
 import Authenticate from 'pages/authenticate';
 import { Route, Routes } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { fetchUserData } from 'utils/firebaseAuth';
+import { fetchUserData } from 'utils/firebaseFunctions';
 import { useEffect, useState } from 'react';
 import { MainContext } from 'utils/context';
-import { setupDBListener } from 'utils/firebaseAuth';
+import { setupDBListener } from 'utils/firebaseFunctions';
 import { products } from 'utils/products';
 import { auth } from 'utils/firebaseConfig';
 
