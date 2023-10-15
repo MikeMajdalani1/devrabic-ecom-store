@@ -14,7 +14,10 @@ const DesktopMenu = () => {
   const navigate = useNavigate();
 
   const signOut = async () => {
-    await signOutUser();
+    const res = await signOutUser();
+    if (res.success) {
+      window.location.reload();
+    }
   };
   return (
     <>

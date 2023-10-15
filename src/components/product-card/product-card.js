@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteProduct, updateArrayData } from 'utils/firebaseFunctions';
 import { AiFillDelete } from 'react-icons/ai';
 function ProductCard({ product }) {
-  const { id, imageURL, name, wasPrice, description, price } = product;
+  const { id, imageURL, title, wasPrice, description, price } = product;
   const { user, isAdmin } = useContext(MainContext);
   const navigate = useNavigate();
   const addProduct = async () => {
@@ -22,10 +22,10 @@ function ProductCard({ product }) {
       <div className="product-card__content">
         <img
           className="product-card__content__image"
-          alt={name}
+          alt={title}
           src={imageURL}
         ></img>
-        <span className="product-card__content__title"> {name}</span>
+        <span className="product-card__content__title"> {title}</span>
         <div className="product-card__content__price">
           {price}{' '}
           {wasPrice && (

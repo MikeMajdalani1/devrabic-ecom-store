@@ -14,7 +14,10 @@ const MobileMenu = ({ closeFn }) => {
   const loc = useLocation();
   const navigate = useNavigate();
   const signOut = async () => {
-    await signOutUser();
+    const res = await signOutUser();
+    if (res.success) {
+      window.location.reload();
+    }
   };
   return (
     <div className="mobile-menu">
@@ -30,23 +33,24 @@ const MobileMenu = ({ closeFn }) => {
         >
           <p>Store</p>
         </Link>
-
-        <Link
-          to="/cart"
-          onClick={closeFn}
-          className={` mobile-menu__content__item ${
-            isCartSelected(loc.pathname)
-              ? 'mobile-menu__content__item--selected'
-              : ''
-          }`}
-        >
-          <p>Cart</p>
-        </Link>
-        {user && cartProducts && (
-          <div className="mobile-menu__content__cart-count">
-            {cartProducts.length}
-          </div>
-        )}
+        <div className="mobile-menu__content mobile-menu__content--cart">
+          <Link
+            to="/cart"
+            onClick={closeFn}
+            className={` mobile-menu__content__item ${
+              isCartSelected(loc.pathname)
+                ? 'mobile-menu__content__item--selected'
+                : ''
+            }`}
+          >
+            <p>Cart</p>
+          </Link>
+          {user && cartProducts && (
+            <div className="mobile-menu__content__cart-count">
+              {cartProducts.length}
+            </div>
+          )}
+        </div>
         {user && isAdmin && (
           <Link
             to="/add-products"
