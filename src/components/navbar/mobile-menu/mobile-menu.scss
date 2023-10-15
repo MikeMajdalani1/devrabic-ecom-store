@@ -11,6 +11,10 @@
     flex-direction: column;
     padding: 20px 50px;
 
+    &--cart {
+      flex-direction: row;
+      align-items: center;
+    }
     &__cart-count {
       border-radius: 50%;
       background-color: $color-primary;

@@ -27,23 +27,24 @@ const MobileMenu = ({ closeFn }) => {
           <p>Store</p>
         </Link>
 
-        <Link
-          to="/cart"
-          onClick={closeFn}
-          className={` mobile-menu__content__item ${
-            isCartSelected(loc.pathname)
-              ? 'mobile-menu__content__item--selected'
-              : ''
-          }`}
-        >
-          <p>Cart</p>
-        </Link>
-        {user && cartProducts && (
-          <div className="mobile-menu__content__cart-count">
-            {cartProducts.length}
-          </div>
-        )}
-
+        <div className="mobile-menu__content mobile-menu__content--cart">
+          <Link
+            to="/cart"
+            onClick={closeFn}
+            className={` mobile-menu__content__item ${
+              isCartSelected(loc.pathname)
+                ? 'mobile-menu__content__item--selected'
+                : ''
+            }`}
+          >
+            <p>Cart</p>
+          </Link>
+          {user && cartProducts && (
+            <div className="mobile-menu__content__cart-count">
+              {cartProducts.length}
+            </div>
+          )}
+        </div>
         {user ? (
           <button onClick={signOut} className="primary">
             Sign Out
