@@ -58,6 +58,7 @@ export const registerUser = async (username, email, password) => {
     await setDoc(doc(database, 'users', user.uid), {
       username: username,
       cartProducts: [],
+      isAdmin: false,
     });
 
     return { success: true }; // Indicate success

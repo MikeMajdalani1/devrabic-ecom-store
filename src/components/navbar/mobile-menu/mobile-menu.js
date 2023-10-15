@@ -47,7 +47,7 @@ const MobileMenu = ({ closeFn }) => {
             {cartProducts.length}
           </div>
         )}
-        {isAdmin && (
+        {user && isAdmin && (
           <Link
             to="/add-products"
             onClick={closeFn}

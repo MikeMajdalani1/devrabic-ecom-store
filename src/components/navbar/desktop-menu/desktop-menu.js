@@ -47,7 +47,7 @@ const DesktopMenu = () => {
         )}
       </div>
 
-      {isAdmin && (
+      {user && isAdmin && (
         <Link
           to="/add-products"
           className={` navbar__right-side__item ${
