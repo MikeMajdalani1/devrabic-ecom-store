@@ -14,9 +14,14 @@ import {
   updateDoc,
   arrayUnion,
   onSnapshot,
+  addDoc,
+  serverTimestamp,
   arrayRemove,
+  deleteDoc,
 } from 'firebase/firestore';
-import { database } from './firebaseConfig';
+import { database, storage } from './firebaseConfig';
+import { v4 as uuidv4 } from 'uuid';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const auth = getAuth();
 
@@ -127,7 +132,7 @@ export const deleteArrayData = async (product) => {
   }
 };
 
-export function setupDBListener(user, callback) {
+export const setupDBListener = async (user, callback) => {
   const docRef = doc(database, 'users', user.uid);
   return onSnapshot(docRef, (doc) => {
     if (doc.exists()) {
@@ -135,4 +140,57 @@ export function setupDBListener(user, callback) {
       callback(data['cartProducts']);
     }
   });
-}
+};
+
+export const handleImageChange = (event) => {
+  const imageFile = event.target.files[0]; // Get the selected image file
+  const storageRef = ref(storage, 'images/' + imageFile.name);
+
+  // Upload the image to Firebase Storage
+  return uploadBytes(storageRef, imageFile).then((snapshot) => {
+    // You can get the download URL to the uploaded image
+    return getDownloadURL(snapshot.ref);
+  });
+};
+
+export const addProduct = async (product) => {
+  try {
+    const id = uuidv4();
+    const productData = {
+      ...product,
+      id: id,
+      createdAt: serverTimestamp(),
+    };
+
+    const productRef = doc(database, 'products', id);
+    await setDoc(productRef, productData);
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export const fetchProducts = async () => {
+  try {
+    const productsRef = collection(database, 'products');
+    const querySnapshot = await getDocs(productsRef);
+
+    const data = querySnapshot.docs.map((doc) => doc.data());
+
+    return { success: true, data: data };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export const deleteProduct = async (productId) => {
+  try {
+    const productRef = doc(database, 'products', productId);
+    await deleteDoc(productRef);
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};

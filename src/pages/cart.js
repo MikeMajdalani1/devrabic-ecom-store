@@ -10,7 +10,7 @@ function Cart() {
       let totalPrice = 0;
 
       cartProducts.forEach((element) => {
-        totalPrice += element.price;
+        totalPrice += Number(element.price);
       });
 
       return totalPrice;

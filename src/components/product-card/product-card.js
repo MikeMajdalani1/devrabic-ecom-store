@@ -1,16 +1,21 @@
 import { MainContext } from 'utils/context';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { updateArrayData } from 'utils/firebaseFunctions';
+import { deleteProduct, updateArrayData } from 'utils/firebaseFunctions';
+import { AiFillDelete } from 'react-icons/ai';
 function ProductCard({ product }) {
-  const { imageURL, name, wasPrice, description, price } = product;
-  const { user } = useContext(MainContext);
+  const { id, imageURL, name, wasPrice, description, price } = product;
+  const { user, isAdmin } = useContext(MainContext);
   const navigate = useNavigate();
   const addProduct = async () => {
     await updateArrayData(product);
   };
   const redirectToLogin = () => {
     navigate('/authenticate');
+  };
+
+  const handleDelete = async () => {
+    await deleteProduct(id);
   };
   return (
     <div className="product-card">
@@ -29,9 +34,15 @@ function ProductCard({ product }) {
             </span>
           )}
         </div>
-        <span className="product-card__content__description">
+        <span className={`${!isAdmin && 'product-card__content__description'}`}>
           {description}
         </span>
+        {isAdmin && (
+          <AiFillDelete
+            className="product-card__content__remove"
+            onClick={handleDelete}
+          />
+        )}
       </div>
       <button
         className="product-card__btn"

@@ -1,11 +1,15 @@
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { isStoreSelected, isCartSelected } from 'utils/checkRoutes';
+import {
+  isStoreSelected,
+  isCartSelected,
+  isAddProductsSelected,
+} from 'utils/checkRoutes';
 import { signOutUser } from 'utils/firebaseFunctions';
 import { MainContext } from 'utils/context';
 import { useContext } from 'react';
 
 const MobileMenu = ({ closeFn }) => {
-  const { user, cartProducts } = useContext(MainContext);
+  const { user, cartProducts, isAdmin } = useContext(MainContext);
 
   const loc = useLocation();
   const navigate = useNavigate();
@@ -42,6 +46,19 @@ const MobileMenu = ({ closeFn }) => {
           <div className="mobile-menu__content__cart-count">
             {cartProducts.length}
           </div>
+        )}
+        {isAdmin && (
+          <Link
+            to="/add-products"
+            onClick={closeFn}
+            className={` mobile-menu__content__item ${
+              isAddProductsSelected(loc.pathname)
+                ? 'mobile-menu__content__item--selected'
+                : ''
+            }`}
+          >
+            <p>Add Products</p>
+          </Link>
         )}
 
         {user ? (

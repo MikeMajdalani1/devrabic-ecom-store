@@ -1,11 +1,15 @@
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { isStoreSelected, isCartSelected } from 'utils/checkRoutes';
+import {
+  isStoreSelected,
+  isCartSelected,
+  isAddProductsSelected,
+} from 'utils/checkRoutes';
 import { MainContext } from 'utils/context';
 import { useContext } from 'react';
 import { signOutUser } from 'utils/firebaseFunctions';
 import { TailSpin } from 'react-loader-spinner';
 const DesktopMenu = () => {
-  const { user, loading, cartProducts } = useContext(MainContext);
+  const { user, loading, cartProducts, isAdmin } = useContext(MainContext);
   const loc = useLocation();
   const navigate = useNavigate();
 
@@ -42,6 +46,20 @@ const DesktopMenu = () => {
           </div>
         )}
       </div>
+
+      {isAdmin && (
+        <Link
+          to="/add-products"
+          className={` navbar__right-side__item ${
+            isAddProductsSelected(loc.pathname)
+              ? 'navbar__right-side__item--selected'
+              : ''
+          }`}
+        >
+          <p>Add Products</p>
+        </Link>
+      )}
+
       <div className="navbar__right-side__btn">
         {loading ? (
           <TailSpin
